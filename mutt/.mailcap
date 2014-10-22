@@ -1,0 +1,13 @@
+# Images
+image/jpeg; /Users/benk/.mutt/view_attachment.sh %s
+image/pjpeg; /Users/benk/.mutt/view_attachment.sh %s
+image/png; /Users/benk/.mutt/view_attachment.sh %s
+image/gif; /Users/benk/.mutt/view_attachment.sh %s
+application/vnd.oasis.opendocument.spreadsheet; /Users/benk/.mutt/view_attachment.sh %s odf
+# PDF
+application/pdf; /Users/benk/.mutt/view_attachment.sh %s pdf
+# Misc
+application/octet-stream; /Users/benk/.mutt/view_attachment.sh %s
+
+# HTML
+text/html; /Users/benk/.mutt/view_attachment.sh %s html

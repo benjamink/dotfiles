@@ -1,0 +1,732 @@
+# Logging
+LOGFILE=/home/users/benk/procmail.log
+#VERBOSE=yes
+#LOGABSTRACT=all
+
+# Junk
+:0
+* From:.*Find.Insurance.*
+Maildir/.Junk/
+
+:0
+* From:.*Dr.Oz.*
+Maildir/.Junk/
+
+:0
+* From:.*Kidz_Safe.*
+Maildir/.Junk/
+
+:0
+* Subject:.*(DrOz|LuvSamsClub|Chex|Urgent\ Pedophile\ Alert|<benk@aweber\.com|<\[to\])
+Maildir/.Junk/
+
+:0
+* B ?? (Sam's\ Club\ Gift\ Cards\ Survey)
+Maildir/.Junk/
+
+:0
+* From:.*(@emedia-us.com|@laplink.com|@e.peachpit.net|@opalevents.org|@traffickflow.com|advanced-engery.co.uk|@jverbalizer.com|parkedfast.com)
+Maildir/.Junk/
+#{
+#    folder=$HOME/Maildir/.Junk/
+#    INCLUDERC=$HOME/.mark_as_read_procmail
+#}
+
+# Spam
+:0
+{
+  :0
+  * Subject:.*ACH Payment.*Canceled
+
+  :0
+  * From:.*(@ac-chamber.org|@professionaltraining3.com|smtp.ig.com.br@)
+}
+/dev/null
+
+# Support/Purchases
+:0
+* From:.*(RM-awmis@att\.com|cbusagent@.*\.att\.com)
+Maildir/.Support.ATT/
+
+:0
+* From:.*@f5.com
+Maildir/.Support.F5/
+
+:0
+* From:.*@mirapath.com
+Maildir/.Purchases.Raritan-Mirapath/
+
+:0
+* From:.*@(apple|itunes).com
+Maildir/.Purchases.Apple/
+
+:0
+* From:.*@symas.com
+Maildir/.Support.Symas/
+
+:0
+* From:.*@cdw.com
+Maildir/.Purchases.CDW/
+
+:0
+* From:.*@hp.com
+Maildir/.Purchases.HP/
+
+:0
+* From:.*@provantage.com
+Maildir/.Purchases.Provantage/
+
+:0
+* From:.*@ebags.com
+Maildir/.Purchases.eBags/
+
+:0
+* From:.*@omniti.com
+Maildir/.Support.OmniTI/
+
+:0
+* From:.*@digium.com
+Maildir/.Support.Digium/
+
+:0
+* From:.*@(salesforce|messagesystems).com
+{
+    :0
+    * From:.*marina@messagesystems.com
+    Maildir/.Purchases.Message\ Systems/
+
+    :0
+    * From:.*(support@messagesystems.com|@salesforce.com)
+    Maildir/.Support.Message\ Systems/
+}
+
+:0
+* From:.*TechSupport@raritan.com
+Maildir/.Support.Raritan/
+
+:0
+* From:.*@(windstream|paetec).com
+Maildir/.Support.US\ Lec-Paetec/
+
+# Silicon Mech. Support
+:0
+* From:.support@siliconmechanics.com
+* Subject:.*ticket.*?\d+
+Maildir/.Support.Silicon\ Mechanics/
+
+# Silicon Mech. Purchases
+:0
+* From:.*@siliconmechanics.com
+Maildir/.Purchases.Silicon\ Mechanics/
+
+# Tenable support, copy to Ryan
+:0
+* From:.*@tenablesecurity.com
+Maildir/.Support.Tenable/
+
+# Trakstar
+#:0
+#* From:.*@promantek.com
+#Maildir/.AWeber\ Misc/Trakstar/
+
+# DMARC Reports
+:0
+* Subject:.*Dmarc Report
+* From:.*root@orc1.colo.lair
+Maildir/.Monitor.DMARC/
+
+# DB Abuse Reports
+:0
+* From:.*(db_abuse@aweber.com|postgres@db-app[1|2].colo.lair)
+Maildir/.Monitor.Security\ Notices.PostgreSQL/
+
+# Firewall DROP reports
+:0
+* Subject:.*Firewall: DROP
+* From:.*root@(s-)?rsyslog?.colo.lair
+Maildir/.Monitor.Security\ Notices.Firewall/
+
+# NMAP Reports
+:0
+* Subject:.*daily nmap
+* From:.*root@splunk1.colo.lair
+Maildir/.Monitor.NMAP/
+
+# ASM Reports
+:0
+* Subject:.*ASM Report
+* From:.*lbasm@aweber.com
+Maildir/.Monitor.ASM\ Reports/
+
+# EC Adaptive Delivery
+:0
+* From:.*ecadaptive@aweber.com
+Maildir/.Monitor.EC\ Adaptive/
+
+# Airwave Reports
+:0
+* From:.*airwave@ofc.lair
+Maildir/.Monitor.AirWave/
+
+# OSSEC
+:0
+* Subject:.*OSSEC Notification
+* From:.*ossecm@(monitor.)?aweber.com
+{
+    :0
+    * B ?? (64\.14\.3\.|64\.41\.168\.248|64\.41\.140\.|216\.35\.7\.|165\.193\.42\.)
+    Maildir/.Monitor.OSSEC.McAfee\ ScanAlart/
+
+    :0
+    * B ?? (216\.93\.249\.249|173\.255\.206\.206|97\.107\.138\.199|178\.79\.134\.118|108\.28\.126\.186|173\.13\.112\.193)
+    Maildir/.Monitor.OSSEC.Rapid7/
+
+    :0
+    * B ?? (216\.93\.249\.140)
+    Maildir/.Monitor.OSSEC.NeXpose/
+
+    :0
+    * B ?? (209\.10\.217\.226)
+    Maildir/.Monitor.OSSEC.WhiteHat\ Scan/
+
+    :0
+    * B ?? (Multiple\ IDS|First\ time\ this\ IDS)
+    Maildir/.Monitor.OSSEC.IDS/
+
+    :0
+    * Subject:.*level 2
+    {
+      :0
+      * B ?? puppet-agent
+      Maildir/.Monitor.OSSEC.level\ 2.puppet-agent/
+
+      ## Bogus notifications due to new-lines in Apache log lines
+      :0
+      * B ?? (url=http://|HTTP/1\.1" 200|%20kidney%20|http%3A%2F%2F|Mozilla/[4|5]\.|\(crt_month\))
+      Maildir/.Monitor.OSSEC.level\ 2.bogus-urls/
+
+      :0
+      * B ?? named.*(enlargements-penis\.com)
+      Maildir/.Monitor.OSSEC.level\ 2.bogus-named/
+
+#      :0
+#      * B ?? (No\ user\ file\?)
+#      Maildir/.Monitor.OSSEC.level\ 2.no-user-file/
+
+      :0
+      Maildir/.Monitor.OSSEC.level\ 2/
+    }
+
+    :0
+    * Subject:.*level 3
+    Maildir/.Monitor.OSSEC.level\ 3/
+
+    :0
+    * Subject:.*level 4
+    Maildir/.Monitor.OSSEC.level\ 4/
+
+    :0
+    * Subject:.*level 5
+    {
+        :0
+        * B ?? (noscript.aweber.com|207\.106\.239\.81|\/users\/wproeditor)
+        /dev/null
+
+#        :0
+#        * B ?? (blog/wp-comments-post.php)
+#        Maildir/.Monitor.OSSEC.level\ 5.wp-comments-post
+
+#        :0
+#        * B ?? (users/quickstats.*HTTP/1.1" 500)
+#        Maildir/.Monitor.OSSEC.level\ 5.quickstats
+
+        :0
+        * B ?? addlead\.pl
+        Maildir/.Monitor.OSSEC.level\ 5.addlead/
+
+        :0
+        * B ?? sendtest\.pl
+        Maildir/.Monitor.OSSEC.level\ 5.sendtest/
+
+        :0
+        Maildir/.Monitor.OSSEC.level\ 5/
+    }
+
+    :0
+    * Subject:.*level 6
+    Maildir/.Monitor.OSSEC.level\ 6/
+
+    :0
+    * Subject:.*level 7
+    {
+        :0
+        * B ?? Integrity checksum changed for
+        Maildir/.Monitor.OSSEC.level\ 7.Checksum\ Changed/
+
+        :0
+        * B ?? was deleted. Unable to retrieve checksum
+        Maildir/.Monitor.OSSEC.level\ 7.File\ Deleted/
+
+        :0
+        * B ?? /home/sites
+        Maildir/.Monitor.OSSEC.level\ 7.home_sites/
+
+        :0
+        * B ?? /home/config
+        Maildir/.Monitor.OSSEC.level\ 7.home_config/
+
+        :0
+        * B ?? (/tmp/prev_ps|/tmp/tmp_Nagios|/tmp/puppet.\d+|/tmp/cron-apt\.s.+?/initlog|/tmp/sess_|/tmp/hsperfdata_hudson)
+        Maildir/.Monitor.OSSEC.level\ 7.not_important/
+
+        :0
+        Maildir/.Monitor.OSSEC.level\ 7/
+    }
+
+    :0
+    * Subject:.*level 8
+    Maildir/.Monitor.OSSEC.level\ 8/
+
+    :0
+    * Subject:.*level 9
+    Maildir/.Monitor.OSSEC.level\ 9/
+
+    :0
+    * Subject:.*level 10
+    {
+        :0
+        * B ?? (173\.161\.171\.65|173\.161\.171\.66|173\.59\.121\.152)
+        Maildir/.Monitor.AlliedInfoPenTest/
+
+        :0
+        * B ?? /users/quickstats
+        #Maildir/.Monitor.OSSEC.level\ 10.quickstats/
+        /dev/null
+
+        :0
+        * B ?? not_found.htm\?filterId=
+        #Maildir/.Monitor.OSSEC.level\ 10.ASM\ 404/
+        /dev/null
+
+        :0
+        * B ?? 207\.106\.239\.81
+        #Maildir/.Monitor.OSSEC.level\ 10.AWeber-Internal/
+        /dev/null
+
+        :0
+        * B ?? access_log
+        {
+#          :0
+#          * B ?? (\?url=http:)
+#          Maildir/.Monitor.OSSEC.level\ 10.access_log.url-malformed
+#
+#          :0
+#          * B ?? (blog/wp-comments-post.php)
+#          Maildir/.Monitor.OSSEC.level\ 10.access_log.wp-comments-post
+#
+#          :0
+#          * B ?? (users/web_forms/Enter%20Image%20URL)
+#          Maildir/.Monitor.OSSEC.level\ 10.access_log.enter-image-url
+
+          :0
+          Maildir/.Monitor.OSSEC.level\ 10.access_log/
+        }
+
+        :0
+        * B ?? error_log
+        Maildir/.Monitor.OSSEC.level\ 10.error_log/
+
+        :0
+        Maildir/.Monitor.OSSEC.level\ 10/
+    }
+
+    :0
+    * Subject:.*level 11
+    Maildir/.Monitor.OSSEC.level\ 11/
+
+    :0
+    * Subject:.*level 12
+    Maildir/.Monitor.OSSEC.level\ 12/
+
+    :0
+    * Subject:.*level 13
+    Maildir/.Monitor.OSSEC.level\ 13/
+}
+Maildir/.Monitor.OSSEC/
+
+# LB hacking attempts
+:0
+* From:.*lbfloat@colo.lair
+* Subject:.*Hacking Attempt
+{
+    :0
+    * B ?? AWEBER.INTERNAL
+    Maildir/.Monitor.LBs.AWeber\ Internal/
+
+    :0
+    * B ?? WHITEHAT.VULN
+    Maildir/.Monitor.LBs.WhiteHat\ Scan/
+
+    :0
+    * B ?? DIR_RECURSION
+    Maildir/.Monitor.LBs.Directory\ Recursion/
+
+    :0
+    * B ?? SQL_INJECTION
+    {
+        :0
+        * B ?? POST
+        Maildir/.Monitor.LBs.SQL\ Injection\ POST/
+    }
+    Maildir/.Monitor.LBs.SQL\ Injection/
+
+    :0
+    * B ?? BAD_FILE_EXTENSION
+    Maildir/.Monitor.LBs.Bad\ File\ Extensions/
+
+    :0
+    * B ?? POSSIBLE_EXPLOIT
+    Maildir/.Monitor.LBs.Possible\ Exploits/
+
+    :0
+    * B ?? POSSIBLE_RETURNING_HACKER
+    Maildir/.Monitor.LBs.Possible\ Returning\ Hacker/
+}
+/Maildir/.Monitor.LBs/
+
+:0
+* Subject:.*Daily report:
+* From:.*ossecm@(monitor.)?aweber.com
+Maildir/.Monitor.OSSEC.Daily\ Reports/
+
+:0
+* From:.*(jira@jira.colo.lair|confluence.confluence.colo.lair|jira@smtp-corp.aweber.com|confluence@smtp-corp.aweber.com)
+Maildir/.JIRA-Confluence/
+
+:0
+* Subject:.*\[ossec-(list|dev)]
+Maildir/.Mailing\ Lists.OSSEC/
+
+:0
+* To:.*awalerts@aweber.com
+Maildir/.Mailing\ Lists.AWeber.Alerts/
+
+:0
+* Subject:.*\[AWeber Trac\] WikiNotifications:
+* From:.*trac@trac.colo.lair
+Maildir/.Mailing\ Lists.AWeber.WikiNotifications/
+
+:0
+* To:.*billing@mailman.colo.lair
+* Subject:.*\[Billing\]
+Maildir/.Mailing\ Lists.AWeber.Billing\ Project/
+
+:0
+* To:.*cloudstack-dev(-help)?@incubator.apache.org
+Maildir/.Mailing\ Lists.CloudStack.Dev/
+
+:0
+* To:.*cloudstack-users(-help)?@incubator.apache.org
+Maildir/.Mailing\ Lists.CloudStack.Users/
+
+:0
+* From:.*(Andi_Abes|Gregory_Althaus|Rob_Hirschfeld)@Dell.com
+Maildir/.Mailing\ Lists.Crowbar/
+
+:0
+* To:.*crowbar@(lists.us.)?dell.com
+Maildir/.Mailing\ Lists.Crowbar/
+
+:0
+* Subject:.*\[Crowbar\]
+* List-Id:.*crowbar.dell.com
+Maildir/.Mailing\ Lists.Crowbar/
+
+:0
+* Subject:.*\[AWeber Trac\] #
+* From:.*trac@trac.colo.lair
+Maildir/.TracUpdates/
+
+:0
+* Subject:.*\[Nagios\]
+* From:.*nagios@aweber.com
+Maildir/.Monitor.Nagios\ Notifications/
+
+:0
+#* Subject:.*\[staging Nagios\]
+* From:.*(staging-nagios@aweber.com|nagios@s-chef-monitor1.colo.lair)
+Maildir/.Monitor.Nagios\ -\ Staging/
+
+:0
+#* Subject:.*\[production Nagios\]
+* From:.*(production-nagios@aweber.com|chef-monitor1.colo.lair)
+Maildir/.Monitor.Nagios\ -\ Production/
+
+:0
+* Subject:.*AWEBER OFFICE (PROBLEM|RECOVERY)
+* From:.*nagios@
+Maildir/.Monitor.Nagios\ -\ Temperature/
+
+:0
+* From:.*puppetmaster@aweber.com
+Maildir/.Monitor.Puppet/
+
+# Cluster Monitor
+:0
+* From:.*ClusterMonitor@aweber.com
+Maildir/.Monitor.Cluster\ Monitor/
+
+# Security Notices
+:0
+* To:.*security_notices@aweber.com
+{
+    :0
+    * B ?? (64\.14\.3\.|64\.41\.168\.248|64\.41\.140\.|216\.35\.7\.|165\.193\.42\.)
+    Maildir/.Monitor.Security\ Notices.ScanAlart/
+
+    :0
+    * B ?? (173\.161\.171\.65|173\.161\.171\.66|173\.59\.121\.152)
+    Maildir/.Monitor.AlliedInfoPenTest/
+
+    :0
+    * B ?? (216\.93\.249\.249|173\.255\.206\.206|97\.107\.138\.199|178\.79\.134\.118|108\.28\.126\.186|173\.13\.112\.193)
+    Maildir/.Monitor.Security\ Notices.Rapid7/
+
+    :0
+    * B ?? (216\.93\.249\.140)
+    Maildir/.Monitor.Security\ Notices.NeXpose/
+
+    :0
+    * B ?? (209\.10\.217\.226)
+    #Maildir/.Monitor.Security\ Notices.WhiteHat\ Scan/
+    /dev/null
+
+    :0
+    Maildir/.Monitor.Security\ Notices/
+}
+
+:0
+* Subject:.*(PRODUCTION|STAGING) Firewall:
+Maildir/.Monitor.Security\ Notices.Firewall/
+
+:0
+* From:.*db_abuse@aweber.com
+Maildir/.Monitor.Security\ Notices.PostgreSQL/
+
+:0
+* From:.*@rhn.redhat.com
+Maildir/.Monitor.Security\ Notices.RedHat\ Updates/
+
+# Mailing Lists
+:0
+* From:.*(infrastructure-changelog-owner@mailman.colo.lair|rancid-colo@grell2.colo.lair)
+Maildir/.Mailing\ Lists.AWeber.Infra-Changelog/
+
+:0
+* Sender:.*awdev-bounces@mailman.colo.lair
+Maildir/.Mailing\ Lists.AWeber.AWDev/
+
+:0
+* Sender:.*cloud-bounces@mailman.colo.lair
+Maildir/.Mailing\ Lists.AWeber.Cloud/
+
+:0
+* Sender:.*awsysadmin-bounces@mailman.colo.lair
+Maildir/.Mailing\ Lists.AWeber.Sysadmins/
+
+:0
+* Sender:.*teamleads-bounces@mailman.colo.lair
+Maildir/.Mailing\ Lists.AWeber.Team\ Leads/
+
+:0
+* Sender:.*nagios-users(-bounces)?@lists.sourceforge.net
+Maildir/.Mailing\ Lists.Nagios.Users/
+
+:0
+* To:.*Nagios-users(-bounces)?@lists.sourceforge.net
+Maildir/.Mailing\ Lists.Nagios.Users/
+
+:0
+* Sender:.*nagios-devel(-bounces)?@lists.sourceforge.net
+Maildir/.Mailing\ Lists.Nagios.Devel/
+
+:0
+* To:.*nagios-devel(-bounces)?@lists.sourceforge.net
+Maildir/.Mailing\ Lists.Nagios.Devel/
+
+:0
+* Sender:.*help-cfengine.*@cfengine.org
+Maildir/.Mailing\ Lists.cfengine/
+
+:0
+* Sender:.*aweber-bounces@lists.commandprompt.com
+Maildir/.Mailing\ Lists.CommandPrompt/
+
+:0
+* Sender:.*pgsql-hackers-owner@postgresql.org
+Maildir/.Mailing\ Lists.PostgreSQL.Hackers/
+
+:0
+* Sender:.*pgadmin-support-owner@postgresql.org
+Maildir/.Mailing\ Lists.PostgreSQL.Admin/
+
+:0
+* Sender:.*gluster-users-bounces@gluster.org
+Maildir/.Mailing\ Lists.glusterfs.Users/
+
+# AWeber Devs
+:0
+* From:.*michaelb@aweber.(com|net)
+Maildir/.AWeberPeople.Michael\ B/
+
+:0
+* From:.*andyc@aweber.(com|net)
+Maildir/.AWeberPeople.Andy\ C/
+
+:0
+* From:.*greggb@aweber.(com|net)
+Maildir/.AWeberPeople.Gregg\ B/
+
+:0
+* From:.*keeganh@aweber.(com|net)
+Maildir/.AWeberPeople.Keegan\ H/
+
+:0
+* From:.*peterjs@aweber.(com|net)
+Maildir/.AWeberPeople.Peter\ S/
+
+:0
+* From:.*ericm@aweber.(com|net)
+Maildir/.AWeberPeople.Eric\ M/
+
+:0
+* From:.*jessicai@aweber.(com|net)
+Maildir/.AWeberPeople.Jessica\ I/
+
+:0
+* From:.*donnab@aweber.(com|net)
+Maildir/.AWeberPeople.Donna\ B/
+
+:0
+* From:.*ericc@aweber.(com|net)
+Maildir/.AWeberPeople.Eric\ C/
+
+:0
+* From:.*brianj@aweber.(com|net)
+Maildir/.AWeberPeople.Brian\ J/
+
+:0
+* From:.*mikef@aweber.(com|net)
+Maildir/.AWeberPeople.Mike\ F/
+
+:0
+* From:.*chrismh@aweber.(com|net)
+Maildir/.AWeberPeople.Chris\ M\ H/
+
+:0
+* From:.*genek@aweber.(com|net)
+Maildir/.AWeberPeople.GeneK/
+
+:0
+* From:.*ethanm@aweber.(com|net)
+Maildir/.AWeberPeople.Ethan/
+
+:0
+* From:.*mikes@aweber.(com|net)
+Maildir/.AWeberPeople.Mike\ S/
+
+:0
+* From:.*fainak@aweber.(com|net)
+Maildir/.AWeberPeople.Faina\ K/
+
+:0
+* From:.*dand@aweber.(com|net)
+Maildir/.AWeberPeople.Dan/
+
+:0
+* From:.*etrikp@aweber.(com|net)
+Maildir/.AWeberPeople.Etrik/
+
+:0
+* From:.*seanc?@aweber.(com|net)
+Maildir/.AWeberPeople.Sean/
+
+:0
+* From:.*stevee@aweber.(com|net)
+Maildir/.AWeberPeople.Steve\ E/
+
+:0
+* From:.*bryand@aweber.(com|net)
+Maildir/.AWeberPeople.Bryan/
+
+:0
+* From:.*tomk?@aweber.(com|net)
+Maildir/.AWeberPeople.Tom/
+
+:0
+* From:.*jordanb@aweber.(com|net)
+Maildir/.AWeberPeople.Jordan/
+
+:0
+* From:.*edl@aweber.(com|net)
+Maildir/.AWeberPeople.Ed/
+
+:0
+* From:.*lanceh@aweber.(com|net)
+Maildir/.AWeberPeople.Lance\ H/
+
+:0
+* From:.*ryans@aweber.(com|net)
+Maildir/.AWeberPeople.Ryan/
+
+:0
+* From:.*davek@aweber.(com|net)
+Maildir/.AWeberPeople.Dave\ K/
+
+:0
+* From:.*jasons@aweber.(com|net)
+Maildir/.AWeberPeople.Jason/
+
+:0
+* From:.*chrish@aweber.(com|net)
+Maildir/.AWeberPeople.Chris/
+
+:0
+* From:.*willw@aweber.(com|net)
+Maildir/.AWeberPeople.Will/
+
+# Gone AWeber People
+:0
+* (From|To):.*jordanb@aweber.com
+Maildir/.GoneAWeberPeople.JordanB/
+
+:0
+* (From|To):.*bille@aweber.com
+Maildir/.GoneAWeberPeople.BillEshbach/
+
+# AWeber Misc
+:0
+* From:.*@adp.com
+Maildir/.AWeber\ Misc.ADP/
+
+:0
+* From:.*(noreply@github-enterprise.colo.lair|github@smtp-corp.aweber.com)
+Maildir/.AWeber\ Misc.Github/
+
+:0
+* Subject:.*AWeber Times:.*
+Maildir/.AWeber\ News/
+
+# Private Labels
+:0
+* From:.*(geotrust|symantec).com
+Maildir/.Private\ Labels/
+
+# Voicemail
+:0
+* From:.*pbx@aweber.com
+Maildir/.Voicemail/
+
+# Catchall
+:0
+Maildir/

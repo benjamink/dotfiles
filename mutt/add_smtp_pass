@@ -1,0 +1,45 @@
+#!/bin/bash
+
+ACCT="$USER"
+SMTPHOST="smtp.aweber.com"
+MUTTPATH="/usr/local/bin/mutt"
+UPDATE=""
+
+echo "Just hit 'enter' to accept the defaults (in parens)."
+echo ""
+read -p "Username ($ACCT): " NEWACCT
+stty -echo
+read -p "Password: " PASSWORD1; echo
+read -p "Password again: " PASSWORD2; echo
+stty echo
+read -p "SMTP Server ($SMTPHOST): " NEWHOST
+read -p "Mutt Path ($MUTTPATH): " NEWPATH
+
+if [ "$PASSWORD1" != "$PASSWORD2" ]; then
+  echo "Passwords don't match!"
+  exit 1
+else
+  PASSWORD=$PASSWORD1
+fi
+
+[[ -n $NEWACCT ]] && ACCT=$NEWACCT
+[[ -n $NEWHOST ]] && SMTPHOST=$NEWHOST
+[[ -n $NEWPATH ]] && MUTTPATH=$NEWPATH
+
+echo ""
+echo "Setting up keychain entry ... "
+security find-internet-password -a $ACCT -s $SMTPHOST >/dev/null 2>&1
+if [ $? ]; then
+  read -p "Overwrite existing entry (y/n)? " YN
+  YN="`echo $YN | tr '[:upper:]' '[:lower:]'`"
+  if [ "$YN" == "y" ]; then
+    echo "Click 'Allow' to allow access to your Keychain in the window that pops up."
+    UPDATE="-U"
+  else
+    echo "Not overwriting existing entry."
+    exit 1
+  fi
+fi
+security add-internet-password $UPDATE -a $ACCT -l $SMTPHOST -r smtp -s $SMTPHOST -T $MUTTPATH -w $PASSWORD
+echo "Done."
+echo ""

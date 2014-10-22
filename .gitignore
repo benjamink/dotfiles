@@ -1,0 +1,13 @@
+locals.zsh
+log/.zsh_history
+projects.zsh
+custom/*
+!custom/example
+!custom/example.zsh
+zsh/custom/aws.zsh
+cache
+*.swp
+vim/.vim-srv/
+mutt/.mutt/imap-cache
+mutt/.mutt/imap-message/*
+zsh/cloudstack
