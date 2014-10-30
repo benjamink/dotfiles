@@ -154,7 +154,7 @@ if has("gui_running")
 
   " Set color scheme
   "colorscheme bk_grb4
-  colorscheme torte
+  colorscheme jellybean
 
   " Hide the toolbar in the GUI
   set go-=T
