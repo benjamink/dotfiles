@@ -19,6 +19,14 @@ function prompt_char {
     echo ''
 }
 
+function user_priv {
+  if [ $(id -u) -gt 0 ]; then
+    echo '$'
+  else
+    echo '#'
+  fi
+}
+
 # ----------------------------------------------------------------------------
 # hg prompt
 # depends upon ~/Projects/hg/hg-prompt
@@ -82,7 +90,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%} ⚑"
 # ----------------------------------------------------------------------------
 PROMPT='
 %{$fg[red]%}[$(date +%Y-%m-%d) $(date +%H:%M:%S)]%{$reset_color%} %{$fg[blue]%}%n%{$reset_color%}@%{$fg[yellow]%}%m%{$reset_color%} in %{$fg[green]%}${PWD/#$HOME/~}%b%{$reset_color%}$(hg_prompt_info)$(git_prompt_info)$(svn_prompt_info)
-$(prompt_char)\$ '
+$(prompt_char)$(user_priv) '
 
 # ----------------------------------------------------------------------------
 # rubies are red, and so my Ruby version is too
