@@ -8,6 +8,7 @@ zsh/custom/aws.zsh
 cache
 *.swp
 vim/.vim-srv/
+vim/.vim/bundle/
 mutt/.mutt/imap-cache
 mutt/.mutt/imap-message/*
 zsh/cloudstack
