@@ -40,6 +40,7 @@ builtin which -s bundle &>/dev/null && plugins+=(bundle)
 [ -e "~/packer/packer" ] && plugins+=(packer)
 
 [ "`uname -s`" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
+[ "`uname -o`" = "GNU/Linux" ] && plugins+=(sshagent)
 [ "`cat /etc/debian_release 2>/dev/null`" = "squeeze/sid" ] && plugins+=(history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
