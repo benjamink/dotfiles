@@ -40,9 +40,9 @@ builtin which -s boot2docker &>/dev/null && plugins+=(docker)
 [ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
 [ -e "~/packer/packer" ] && plugins+=(packer)
 
-[ "`uname -s`" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
-[ "`uname -o`" = "GNU/Linux" ] && plugins+=(sshagent)
-[ "`cat /etc/debian_release 2>/dev/null`" = "squeeze/sid" ] && plugins+=(history-substring-search)
+[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
+[ "$(uname -o)" = "GNU/Linux" ] && plugins+=(sshagent)
+[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 

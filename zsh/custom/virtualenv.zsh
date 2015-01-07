@@ -9,3 +9,4 @@ function use-ve () {
 
 alias activate="use-ve"
 alias end-ve="deactivate"
+alias list-ve="ls -1 ~/.virtualenv"
