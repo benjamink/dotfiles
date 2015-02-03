@@ -1,5 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/benkrein/git/vagrant-elk-box/manifests'
-let g:netrw_dirhist_2='/Users/benkrein/svn/puppet/common/mysql/manifests/server'
-let g:netrw_dirhist_3='/Users/benkrein/git/meg/vagrant/Puppet'
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/Users/benkrein/svn/puppet'
+let g:netrw_dirhist_2='/Users/benkrein/svn/puppet/hiera-secure'
+let g:netrw_dirhist_3='/Users/benkrein/svn/puppet/hiera-secure/vl1'
+let g:netrw_dirhist_4='/Users/benkrein/svn/vSphere'
+let g:netrw_dirhist_5='/Users/benkrein/svn/puppet/common'
+let g:netrw_dirhist_6='/Users/benkrein/svn/puppet/common/build/manifests'
+let g:netrw_dirhist_7='/Users/benkrein/svn/puppet_tag'
