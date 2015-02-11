@@ -9,6 +9,7 @@ cache
 *.swp
 vim/.vim-srv/
 vim/.vim/bundle/
+vim/.vim/.netrwhist
 mutt/.mutt/imap-cache
 mutt/.mutt/imap-message/*
 zsh/cloudstack
