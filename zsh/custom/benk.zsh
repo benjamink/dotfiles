@@ -30,6 +30,17 @@ alias ipynotebook="ipython notebook --notebook-dir=~/ipython/ --script --logfile
 
 ### Functions
 
+# Generate SHA512 hash for /etc/shadow
+mkshadow () {
+  if [ -z "$1" ] || [ -z "$2" ]
+  then
+    echo "Usage: mkshadow <password> <salt>"
+  else
+    python -c "import crypt, getpass, pwd; \
+                   print crypt.crypt('$1', '\$6\$${2}\$')"
+  fi
+}
+
 # Generate ASCII QR code
 qr () {
   if [ -x "$(which qrencode)" ]; then
