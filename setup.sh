@@ -6,6 +6,15 @@
 [ -h ~/.zshrc ] || ( echo "Setting up ~/.zshrc"; ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc )
 [ -h ~/.oh-my-zsh ] || ( echo "Setting up ~/.oh-my-zsh"; ln -sf ~/dotfiles/zsh ~/.oh-my-zsh )
 
+# Setup Zsh as the default shell
+if [[ $(dscl . -read /Users/$USER UserShell | cut -d' ' -f2) != "/bin/zsh" ]]
+then
+  chsh -s /bin/zsh
+fi
+
+# Source zshrc
+. ~/.zshrc
+
 # Install Vim Bundles
 if [ -z "$(ls ~/dotfiles/vim/.vim/bundle)" ]
 then
