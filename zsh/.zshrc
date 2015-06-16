@@ -36,6 +36,7 @@ builtin which -s brew &>/dev/null && plugins+=(brew mybrew)
 builtin which -s boxen &>/dev/null && plugins+=(boxen)
 builtin which -s bundle &>/dev/null && plugins+=(bundle)
 builtin which -s boot2docker &>/dev/null && plugins+=(docker)
+[[ -d /opt/chefdk ]] && plugins+=(chefdk)
 
 [ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
 [ -e "~/packer/packer" ] && plugins+=(packer)
