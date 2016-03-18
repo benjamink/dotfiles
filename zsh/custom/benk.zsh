@@ -30,6 +30,15 @@ alias ipynotebook="ipython notebook --notebook-dir=~/ipython/ --script --logfile
 
 ### Functions
 
+vansible () {
+  ansible $1 --private-key=~/.vagrant.d/insecure_private_key -u vagrant -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory -m $2
+}
+
+# Show GMT of given time
+gmt () {
+  TZ='GMT' date $1
+}
+
 # Generate SHA512 hash for /etc/shadow
 mkshadow () {
   if [ -z "$1" ] || [ -z "$2" ]

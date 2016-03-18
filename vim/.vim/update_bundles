@@ -27,7 +27,10 @@ git_bundles = [
   "git://github.com/scrooloose/syntastic",
   "git://github.com/rodjek/vim-puppet.git",
   "git://github.com/vim-scripts/Specky.git",
-  "git://github.com/markcornick/vim-vagrant.git"
+  "git://github.com/markcornick/vim-vagrant.git",
+  "git://github.com/marcweber/vim-addon-mw-utils",
+  "git://github.com/tomtom/tlib_vim",
+  "git://github.com/vadv/vim-chef"
 ]
 
 git_custom = {

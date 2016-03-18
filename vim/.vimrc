@@ -83,6 +83,9 @@ if has("autocmd")
 
   augroup END
 
+  " Set Chef filetypes for vim-chef plugin
+  "autocmd FileType ruby,eruby set filetype=ruby.eruby.chef
+
 else
 
   set autoindent		" always set autoindenting on
@@ -196,6 +199,34 @@ let g:Powerline_mode_V="V·LINE"
 let g:Powerline_mode_cv="V·BLOCK"
 let g:Powerline_mode_S="S·LINE"
 let g:Powerline_mode_cs="S·BLOCK"
+
+"####################################################################
+"# Syntastic
+"####################################################################
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"####################################################################
+"# Pymode
+"####################################################################
+
+"let g:pymode_rope_lookup_project = 0
+let g:pymode_run = 1
+let g:pymode_rope = 0
+let g:pymode_folding = 0
+let g:pymode_syntax = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax_slow_sync = 1
+let g:pymode_trim_whitespace = 1
+let g:pymode_lint = 1
+let g:pymode_dco = 0
 
 "####################################################################
 "# Load in additional vimrc files
