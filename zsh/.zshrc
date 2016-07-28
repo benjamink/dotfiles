@@ -24,7 +24,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(perl pip python gem benk)
+plugins=(perl pip python gem kitchen benk)
 
 builtin which -s git &>/dev/null && plugins+=(git)
 builtin which -s knife &>/dev/null && plugins+=(knife)
@@ -35,7 +35,8 @@ builtin which -s virtualenv &>/dev/null && plugins+=(virtualenv)
 builtin which -s brew &>/dev/null && plugins+=(brew mybrew)
 builtin which -s boxen &>/dev/null && plugins+=(boxen)
 builtin which -s bundle &>/dev/null && plugins+=(bundle)
-builtin which -s docker &>/dev/null && plugins+=(docker)
+#builtin which -s docker &>/dev/null && plugins+=(docker)
+builtin which -s ansible &>/dev/null && plugins+=(ansible)
 [[ -d /opt/chefdk ]] && plugins+=(chefdk)
 [[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
 
@@ -52,4 +53,3 @@ source $ZSH/oh-my-zsh.sh
 
 # Report CPU usage for commands running longer than 10 seconds
 REPORTTIME=10
-

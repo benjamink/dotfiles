@@ -168,7 +168,12 @@ if has("gui_running")
   " Don't show scroll bars in the GUI
   set guioptions-=L
   set guioptions-=r
+
+  " Use italics for comments
+  highlight Comment cterm=italic
+
 endif
+
 
 "####################################################################
 "# Folding Options
