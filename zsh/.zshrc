@@ -24,7 +24,7 @@ DISABLE_AUTO_UPDATE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(perl pip python gem kitchen benk)
+plugins=(perl pip python gem kitchen gitlab benk)
 
 builtin which -s git &>/dev/null && plugins+=(git)
 builtin which -s knife &>/dev/null && plugins+=(knife)
