@@ -63,6 +63,7 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
   set guifont=Andale\ Mono:h11
   set noantialias
+  set guicursor+=a:blinkon0
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -150,6 +151,7 @@ if has("gui_running")
   " Set window size"
   set lines=60
   set columns=100
+  set guifont=Andale\ Mono:h14
 
   " Highlight current line
   set cursorline
