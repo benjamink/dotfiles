@@ -37,6 +37,7 @@ builtin which -s boxen &>/dev/null && plugins+=(boxen)
 builtin which -s bundle &>/dev/null && plugins+=(bundle)
 #builtin which -s docker &>/dev/null && plugins+=(docker)
 builtin which -s ansible &>/dev/null && plugins+=(ansible)
+builtin which -s go &>/dev/null && plugins+=(go)
 [[ -d /opt/chefdk ]] && plugins+=(chefdk)
 [[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
 
