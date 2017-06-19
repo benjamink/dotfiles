@@ -35,9 +35,9 @@ vansible () {
 }
 
 # Show GMT of given time
-gmt () {
-  TZ='GMT' date $1
-}
+#gmt () {
+#  TZ='GMT' date $1
+#}
 
 # Generate SHA512 hash for /etc/shadow
 mkshadow () {

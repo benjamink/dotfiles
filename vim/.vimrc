@@ -61,7 +61,8 @@ set list listchars=tab:»·,trail:·
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
-  set guifont=Andale\ Mono:h11
+  "set guifont=Andale\ Mono:h11
+  set guifont=Inconsolata-dz:h11
   set noantialias
   set guicursor+=a:blinkon0
 endif

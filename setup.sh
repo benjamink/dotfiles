@@ -4,7 +4,7 @@
 [ -h ~/.vimrc ] || ( echo "Setting up ~/.vimrc"; ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc )
 [ -h ~/.vim ] || ( echo "Setting up ~/.vim"; ln -sf ~/dotfiles/vim/.vim ~/.vim )
 [ -h ~/.zshrc ] || ( echo "Setting up ~/.zshrc"; ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc )
-[ -h ~/.oh-my-zsh ] || ( echo "Setting up ~/.oh-my-zsh"; ln -sf ~/dotfiles/zsh ~/.oh-my-zsh )
+[ -h ~/.oh-my-zsh ] || ( echo "Setting up ~/.oh-my-zsh"; ln -sf ~/dotfiles/zsh/custom/* ~/.oh-my-zsh/custom/ )
 
 # Setup Zsh as the default shell
 if [[ $(dscl . -read /Users/$USER UserShell | cut -d' ' -f2) != "/bin/zsh" ]]
