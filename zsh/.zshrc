@@ -68,6 +68,7 @@ builtin which -s nmap &>/dev/null && plugins+=(nmap)
 builtin which -s http &>/dev/null && plugins+=(httpie)
 builtin which -s tig &>/dev/null && plugins+=(tig)
 builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
+builtin which -s fab &>/dev/null && plugins+=(fabric)
 #[[ -d /opt/chefdk ]] && plugins+=(chefdk)
 #[[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
 
