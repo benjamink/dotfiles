@@ -51,9 +51,9 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pip python gem kitchen gitlab benk)
+plugins=(colorize jira git pip python gem kitchen gitlab colored-man-pages dircycle history web-search themes fancy-ctrl-z benk)
 
-builtin which -s git &>/dev/null && plugins+=(git)
+builtin which -s git &>/dev/null && plugins+=(git git-extras)
 #builtin which -s knife &>/dev/null && plugins+=(knife)
 builtin which -s port &>/dev/null && plugins+=(macports)
 builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
@@ -64,6 +64,10 @@ builtin which -s boxen &>/dev/null && plugins+=(boxen)
 builtin which -s bundle &>/dev/null && plugins+=(bundle)
 builtin which -s ansible &>/dev/null && plugins+=(ansible)
 builtin which -s go &>/dev/null && plugins+=(go)
+builtin which -s nmap &>/dev/null && plugins+=(nmap)
+builtin which -s http &>/dev/null && plugins+=(httpie)
+builtin which -s tig &>/dev/null && plugins+=(tig)
+builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
 #[[ -d /opt/chefdk ]] && plugins+=(chefdk)
 #[[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
 
@@ -78,6 +82,16 @@ builtin which -s go &>/dev/null && plugins+=(go)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+export JIRA_URL="https://jira.maaslab.uspa.ibm.com"
+export JIRA_NAME="benjamin.krein"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# History configuration
+# Don't store commands prepended with a space in the history
+HIST_IGNORE_SPACE="true"
+HIST_NO_STORE="true"
+HIST_IGNORE_ALL_DUPS="true"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -105,3 +119,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# added by travis gem
+[ -f /Users/bkrein/.travis/travis.sh ] && source /Users/bkrein/.travis/travis.sh
