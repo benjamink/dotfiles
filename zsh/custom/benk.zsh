@@ -2,6 +2,8 @@ export HOSTNAME=`/bin/hostname`
 export EDITOR=vim
 export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
 export RBENV_ROOT=/usr/local/var/rbenv
+export ARTIFACTORY_API_TOKEN="$(cat ~/.artifactory)"
+export VAGRANT_USE_VAGRANT_TRIGGERS=false
 
 # ##Aliases
 
@@ -12,6 +14,8 @@ alias vu="vagrant up"
 alias vd="vagrant destroy"
 alias vh="vagrant halt"
 alias vs="vagrant status"
+alias vp="vagrant provision"
+alias vspec="vagrant provision --provision-with serverspec"
 alias vssh="vagrant ssh"
 alias mutt="nocorrect mutt"
 alias la="ls -la"
@@ -27,11 +31,63 @@ alias myps="ps auxwww"
 alias init_dnsmasq="sudo killall dnsmasq && sudo dscacheutil -flushcache"
 alias portstat="lsof -i -n -P"
 alias ipynotebook="ipython notebook --notebook-dir=~/ipython/ --script --logfile=~/ipython/ipy-notebook.log"
+alias pupsync="rsync -auv --delete /Users/bkrein/IBM/puppet/common bz1puppet1-0.bb.internal.maas360.com:/u001/puppet/bkrein"
+alias k="kubectl"
+alias sk='export KUBECONFIG=superk_kube/config'
 
 ### Functions
 
+weather () {
+  curl "http://wttr.in/${*:-18976}"
+}
+
+i2csshenv () {
+  i2cssh -b -C1 ${1}infra1-0.bl.internal.maas360.com ${1}portalapp{1,2}-0.bl.internal.maas360.com
+}
+
+ikscfg () {
+  eval $(ibmcloud ks cluster-config $1 --export)
+}
+
+rmd () {
+  pandoc $1 | lynx -stdin
+}
+
 vansible () {
   ansible $1 --private-key=~/.vagrant.d/insecure_private_key -u vagrant -i .vagrant/provisioners/ansible/inventory/vagrant_ansible_inventory -m $2
+}
+
+# Shamelessly stolen from CMH as a way to distribute a sane shell environment where NFS homedirs don't exist
+hd ()
+{
+    # set the source path
+    typeset source=~/git/dotfiles/server/;
+    # Default to both rsync and ssh
+    typeset RSYNC=1;
+    typeset SSH=1;
+    # Override
+    case $1 in
+        "-x")
+	    # Only copy dotfiles, don't log in
+            echo "Skipping login, just update.";
+            RSYNC=1;
+            SSH=0;
+            shift
+        ;;
+        *skm*)
+	    # Idiot-proofing myself
+            echo "Don't rsync to an SKM server, moron!";
+            RSYNC=0
+        ;;
+    esac;
+    # Get the servername - works with user@host syntax
+    typeset svr=${1##*@};
+    # Check to see if this is a legit host in the ssh config, or that it's alive.
+    grep --color=auto -qw ${svr} ~/.ssh/config || fping ${svr} || return 1;
+    # rsync out the source directory
+    (( RSYNC )) && rsync -ai --exclude='*.swp' --exclude='.git*' --exclude='*.md' $source $1:./;
+    # Connect to the host
+    (( SSH )) && ssh $1
 }
 
 # Show GMT of given time

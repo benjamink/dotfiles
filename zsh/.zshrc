@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/opt/libiconv/bin:$PATH:~/bin:~/bin/kui/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/bkrein/.oh-my-zsh
@@ -7,7 +8,19 @@ export ZSH=/Users/bkrein/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+#ZSH_THEME="bk_agnoster"
+ZSH_THEME="ys"
+#ZSH_THEME=powerlevel10k/powerlevel10k
+#
+#POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir_writable dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+#
+#POWERLEVEL9K_MODE=nerdfont-complete
+#POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+#POWERLEVEL9K_ROOT_ICON=$'\uF09C'
+#POWERLEVEL9K_TIME_ICON=$'\uF017'
+#POWERLEVEL9K_TIME_BACKGROUND=magenta
+#POWERLEVEL9K_STATUS_OK_BACKGROUND=grey53
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -51,16 +64,17 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colorize jira git pip python gem kitchen gitlab colored-man-pages dircycle history web-search themes fancy-ctrl-z benk)
+#plugins=(colorize jira git pip python gem kitchen gitlab colored-man-pages dircycle history web-search themes fancy-ctrl-z zsh-autosuggestions artifactory benk history-substring-search sshagent)
+plugins=(colorize git pip python gem gitlab colored-man-pages dircycle history themes fancy-ctrl-z zsh-autosuggestions benk history-substring-search sshagent)
 
 builtin which -s git &>/dev/null && plugins+=(git git-extras)
 #builtin which -s knife &>/dev/null && plugins+=(knife)
-builtin which -s port &>/dev/null && plugins+=(macports)
+#builtin which -s port &>/dev/null && plugins+=(macports)
 builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
 #builtin which -s svn &>/dev/null && plugins+=(svn)
 builtin which -s virtualenv &>/dev/null && plugins+=(virtualenv)
 builtin which -s brew &>/dev/null && plugins+=(brew mybrew)
-builtin which -s boxen &>/dev/null && plugins+=(boxen)
+#builtin which -s boxen &>/dev/null && plugins+=(boxen)
 builtin which -s bundle &>/dev/null && plugins+=(bundle)
 builtin which -s ansible &>/dev/null && plugins+=(ansible)
 builtin which -s go &>/dev/null && plugins+=(go)
@@ -69,30 +83,45 @@ builtin which -s http &>/dev/null && plugins+=(httpie)
 builtin which -s tig &>/dev/null && plugins+=(tig)
 builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
 builtin which -s fab &>/dev/null && plugins+=(fabric)
+builtin which -s kubectl &>/dev/null && plugins+=(kubectl customk8s)
+builtin which -s vault &>/dev/null && plugins+=(vault)
+builtin which -s terraform &>/dev/null && plugins+=(terraform)
+builtin which -s cloudctl &>/dev/null && plugins+=(icp)
+builtin which -s rbenv &>/dev/null && plugins+=(rbenv)
+builtin which -s oc &>/dev/null && plugins+=(oc oc-cmd fyre)
+#builtin which -s crc &>/dev/null && plugins+=(crc-oc)
+builtin which -s asdf &>/dev/null && plugins+=(asdf)
+builtin which -s op &>/dev/null && plugins+=(1password)
+builtin which -s helm &>/dev/null && plugins+=(helm)
 #[[ -d /opt/chefdk ]] && plugins+=(chefdk)
 #[[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
 
-[ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
+#[ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
 [ -e "~/packer/packer" ] && plugins+=(packer)
 
-[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
-[ "$(uname -s)" = "Linux" ] && plugins+=(sshagent)
-[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
+#[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
+#[ "$(uname -s)" = "Linux" ] && plugins+=(sshagent)
+#[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
 
+#source ~/dotfiles/zsh/custom/plugins/gitstatus/gitstatus.plugin.zsh
+#source ~/dotfiles/zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export JIRA_URL="https://jira.maaslab.uspa.ibm.com"
-export JIRA_NAME="benjamin.krein"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+#export JIRA_URL="https://jira.maaslab.uspa.ibm.com"
+#export JIRA_NAME="benjamin.krein"
+#export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # History configuration
 # Don't store commands prepended with a space in the history
 HIST_IGNORE_SPACE="true"
 HIST_NO_STORE="true"
 HIST_IGNORE_ALL_DUPS="true"
+
+# zsh-autosuggestion Configs
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=green'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -123,3 +152,10 @@ HIST_IGNORE_ALL_DUPS="true"
 
 # added by travis gem
 [ -f /Users/bkrein/.travis/travis.sh ] && source /Users/bkrein/.travis/travis.sh
+
+### Added by the Bluemix CLI
+source /usr/local/ibmcloud/autocomplete/zsh_autocomplete
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+

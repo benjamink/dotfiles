@@ -1,40 +1,43 @@
 #!/usr/bin/env ruby
 #"git://github.com/ervandew/supertab.git",
 git_bundles = [
-  "git://github.com/bling/vim-airline.git",
-  "git://github.com/nvie/vim-pyunit.git",
-  "git://github.com/klen/python-mode.git",
-  "git://github.com/astashov/vim-ruby-debugger.git",
-  "git://github.com/godlygeek/tabular.git",
-  "git://github.com/depuracao/vim-rdoc.git",
-  "git://github.com/msanders/snipmate.vim.git",
-  "git://github.com/pangloss/vim-javascript.git",
-  "git://github.com/scrooloose/nerdtree.git",
-  "git://github.com/timcharper/textile.vim.git",
-  "git://github.com/tpope/vim-cucumber.git",
-  "git://github.com/tpope/vim-fugitive.git",
-  "git://github.com/tpope/vim-git.git",
-  "git://github.com/tpope/vim-haml.git",
-  "git://github.com/tpope/vim-markdown.git",
-  "git://github.com/tpope/vim-rails.git",
-  "git://github.com/tpope/vim-repeat.git",
-  "git://github.com/tpope/vim-surround.git",
-  "git://github.com/tpope/vim-vividchalk.git",
-  "git://github.com/tsaleh/vim-shoulda.git",
-  "git://github.com/tsaleh/vim-tmux.git",
-  "git://github.com/vim-ruby/vim-ruby.git",
-  "git://github.com/vim-scripts/Gist.vim.git",
-  "git://github.com/scrooloose/syntastic",
-  "git://github.com/rodjek/vim-puppet.git",
-  "git://github.com/vim-scripts/Specky.git",
-  "git://github.com/markcornick/vim-vagrant.git",
-  "git://github.com/marcweber/vim-addon-mw-utils",
-  "git://github.com/tomtom/tlib_vim",
-  "git://github.com/vadv/vim-chef"
+  "git://github.com/bling/vim-airline.git",             # Enhanced fancy status line
+  "git://github.com/nvie/vim-pyunit.git",               # Python nose unit testing integration
+  "git://github.com/klen/python-mode.git",              # Collection of Python tools to facilitate writing Python code
+  "git://github.com/astashov/vim-ruby-debugger.git",    # Built-in Ruby debugger
+  "git://github.com/godlygeek/tabular.git",             # Automatically line up lines based on a delimeter or dilimeter rules
+  "git://github.com/depuracao/vim-rdoc.git",            # Syntax help for RDoc (Ruby docs)
+  "git://github.com/garbas/vim-snipmate.git",           # Code templates to automatically generate common code structures
+  "git://github.com/pangloss/vim-javascript.git",       # Syntax highlighting & indentations for Javascript
+  "git://github.com/scrooloose/nerdtree.git",           # File system explorer inside Vim
+  "git://github.com/timcharper/textile.vim.git",        # Textile support
+  "git://github.com/tpope/vim-cucumber.git",            # Support for Ruby acceptance testing language, Cucumber
+  "git://github.com/tpope/vim-fugitive.git",            # Git support
+  "git://github.com/tpope/vim-git.git",                 # Git support
+#  "git://github.com/tpope/vim-haml.git",                # Uh, I don't know what haml is...
+  "git://github.com/tpope/vim-markdown.git",            # Markdown support
+  "git://github.com/tpope/vim-rails.git",               # Syntax highlighting & indentation for Ruby on Rails
+  "git://github.com/tpope/vim-repeat.git",              # Enhance vim's '.' (repeat last change) feature
+  "git://github.com/tpope/vim-surround.git",            # Quickly change surrounding characters (eg, quotes)
+  "git://github.com/tpope/vim-vividchalk.git",          # Customized Vim Theme
+#  "git://github.com/tsaleh/vim-shoulda.git",            # Don't really understand this one (http://tammersaleh.com/posts/introducing-the-shoulda-testing-plugin/)
+#  "git://github.com/tsaleh/vim-tmux.git",               # This plugin looks abandoned
+  "git://github.com/vim-ruby/vim-ruby.git",             # Collection of Ruby tools to facilitate writing Ruby code
+  "git://github.com/vim-scripts/Gist.vim.git",          # GitHub Gist integration
+  "git://github.com/scrooloose/syntastic",              # Syntax checking of multiple languages
+  "git://github.com/rodjek/vim-puppet.git",             # Puppet coding support
+  "git://github.com/vim-scripts/Specky.git",            # Enhancements to help with writing/running Rspec
+  "git://github.com/markcornick/vim-vagrant.git",       # Support for running Vagrant from within Vim
+  "git://github.com/marcweber/vim-addon-mw-utils",      # Not entirely sure what this does
+  "git://github.com/tomtom/tlib_vim",                   # Library functions used by other plugins
+  "git://github.com/xolox/vim-session.git",             # Enhance Vim's built-in session support
+  "git://github.com/xolox/vim-misc.git",                # Library functions required by vim-session
+  "git://github.com/honza/vim-snippets.git",            # Default snippets for vim-snippet
+#  "git://github.com/vadv/vim-chef"                      # Chef coding support
 ]
 
 git_custom = {
-  "https://github.com/egeland/puppet.snippets/blob/master/puppet.snippets" => "snipmate.vim/snippets/puppet.snippets"
+  "https://github.com/egeland/puppet.snippets/blob/master/puppet.snippets" => "bundle/vim-snipmate/snippets/puppet.snippets"
 }
 
 vim_org_scripts = [
@@ -60,6 +63,7 @@ end
 
 git_custom.each do |url, dest|
   puts "checking out custom file into #{dest}"
+  `mkdir -p #{File.join(dest.split('/')[0..-2])}`
   `curl -o #{dest} #{url}`
 end
 
