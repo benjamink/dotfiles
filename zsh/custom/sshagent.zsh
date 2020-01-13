@@ -6,4 +6,4 @@ if [ -z "$SSH_AUTH_SOCK" -a -x "$SSHAGENT" ]; then
 fi
 
 # Load in SSH keys from Keychain
-ssh-add -K
+[[ "$(uname -s)" = "Darwin" ]] && ssh-add -K

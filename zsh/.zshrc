@@ -3,7 +3,7 @@
 export PATH=/usr/local/opt/libiconv/bin:$PATH:~/bin:~/bin/kui/bin
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/bkrein/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -99,9 +99,15 @@ builtin which -s helm &>/dev/null && plugins+=(helm)
 #[ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
 [ -e "~/packer/packer" ] && plugins+=(packer)
 
+<<<<<<< HEAD
 #[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
 #[ "$(uname -s)" = "Linux" ] && plugins+=(sshagent)
 #[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
+=======
+[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
+[ "$(uname -s)" = "Linux" ] && plugins+=(aj history-substring-search zsh-syntax-highlighting )
+[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
+>>>>>>> 38a6148cf697b61f632bfbef90b688e4ab4f3921
 
 #source ~/dotfiles/zsh/custom/plugins/gitstatus/gitstatus.plugin.zsh
 #source ~/dotfiles/zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
@@ -151,6 +157,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=green'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # added by travis gem
+<<<<<<< HEAD
 [ -f /Users/bkrein/.travis/travis.sh ] && source /Users/bkrein/.travis/travis.sh
 
 ### Added by the Bluemix CLI
@@ -159,3 +166,6 @@ source /usr/local/ibmcloud/autocomplete/zsh_autocomplete
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
 
+=======
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+>>>>>>> 38a6148cf697b61f632bfbef90b688e4ab4f3921

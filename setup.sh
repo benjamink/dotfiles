@@ -7,9 +7,15 @@
 [ -h ~/.oh-my-zsh ] || ( echo "Setting up ~/.oh-my-zsh"; ln -sf ~/dotfiles/zsh/custom/* ~/.oh-my-zsh/custom/ )
 
 # Setup Zsh as the default shell
-if [[ $(dscl . -read /Users/$USER UserShell | cut -d' ' -f2) != "/bin/zsh" ]]
+if [[ $(which dscl) ]]
 then
-  chsh -s /bin/zsh
+  if [[ $(dscl . -read /Users/$USER UserShell | cut -d' ' -f2) != "/bin/zsh" ]]
+  then
+    chsh -s /bin/zsh
+  fi
+else
+  echo "Your sudo password is required to modify your shell"
+  sudo usermod -s /bin/zsh $(logname)
 fi
 
 # Source zshrc

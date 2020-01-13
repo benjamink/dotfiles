@@ -36,6 +36,10 @@ git_bundles = [
 #  "git://github.com/vadv/vim-chef"                      # Chef coding support
 ]
 
+if /linux/ =~ RUBY_PLATFORM
+  git_bundles << "git clone https://github.com/stevearc/vim-arduino"
+end
+
 git_custom = {
   "https://github.com/egeland/puppet.snippets/blob/master/puppet.snippets" => "bundle/vim-snipmate/snippets/puppet.snippets"
 }
