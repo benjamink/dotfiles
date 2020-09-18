@@ -5,7 +5,18 @@ export RBENV_ROOT=/usr/local/var/rbenv
 export ARTIFACTORY_API_TOKEN="$(cat ~/.artifactory)"
 export VAGRANT_USE_VAGRANT_TRIGGERS=false
 
-# ##Aliases
+###Suffix Aliases
+
+alias -s yaml=code
+alias -s yml=code
+alias -s txt=code
+alias -s sh=code
+alias -s md=code
+alias -s html=code
+alias -s json=code
+alias -s pp=code
+
+###Aliases
 
 alias vbm="VBoxManage"
 alias v="vagrant"
@@ -34,6 +45,12 @@ alias ipynotebook="ipython notebook --notebook-dir=~/ipython/ --script --logfile
 alias pupsync="rsync -auv --delete /Users/bkrein/IBM/puppet/common bz1puppet1-0.bb.internal.maas360.com:/u001/puppet/bkrein"
 alias k="kubectl"
 alias sk='export KUBECONFIG=superk_kube/config'
+alias zshrc="source $HOME/.zshrc"
+
+if [[ $OSTYPE == darwin* ]];
+then
+  alias flushdns='sudo dscacheutil -flushcache;sudo killall -HUP mDNSResponder;'
+fi
 
 ### Functions
 

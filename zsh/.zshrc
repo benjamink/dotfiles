@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/usr/local/opt/libiconv/bin:$PATH:~/bin:~/bin/kui/bin
+export PATH=/usr/local/opt/libiconv/bin:$PATH:/opt/puppetlabs/bin:~/bin:~/bin/kui/bin
+export GOPATH=$HOME/go
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -65,49 +66,44 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(colorize jira git pip python gem kitchen gitlab colored-man-pages dircycle history web-search themes fancy-ctrl-z zsh-autosuggestions artifactory benk history-substring-search sshagent)
-plugins=(colorize git pip python gem gitlab colored-man-pages dircycle history themes fancy-ctrl-z zsh-autosuggestions benk history-substring-search sshagent)
+plugins=(mygit colorize pip python gem gitlab colored-man-pages dircycle history themes fancy-ctrl-z zsh-autosuggestions benk history-substring-search )
 
 builtin which -s git &>/dev/null && plugins+=(git git-extras)
-#builtin which -s knife &>/dev/null && plugins+=(knife)
-#builtin which -s port &>/dev/null && plugins+=(macports)
-builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
-#builtin which -s svn &>/dev/null && plugins+=(svn)
-builtin which -s virtualenv &>/dev/null && plugins+=(virtualenv)
-builtin which -s brew &>/dev/null && plugins+=(brew mybrew)
-#builtin which -s boxen &>/dev/null && plugins+=(boxen)
-builtin which -s bundle &>/dev/null && plugins+=(bundle)
 builtin which -s ansible &>/dev/null && plugins+=(ansible)
-builtin which -s go &>/dev/null && plugins+=(go)
-builtin which -s nmap &>/dev/null && plugins+=(nmap)
-builtin which -s http &>/dev/null && plugins+=(httpie)
-builtin which -s tig &>/dev/null && plugins+=(tig)
-builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
-builtin which -s fab &>/dev/null && plugins+=(fabric)
-builtin which -s kubectl &>/dev/null && plugins+=(kubectl customk8s)
-builtin which -s vault &>/dev/null && plugins+=(vault)
-builtin which -s terraform &>/dev/null && plugins+=(terraform)
-builtin which -s cloudctl &>/dev/null && plugins+=(icp)
-builtin which -s rbenv &>/dev/null && plugins+=(rbenv)
-builtin which -s oc &>/dev/null && plugins+=(oc oc-cmd fyre)
-#builtin which -s crc &>/dev/null && plugins+=(crc-oc)
 builtin which -s asdf &>/dev/null && plugins+=(asdf)
-builtin which -s op &>/dev/null && plugins+=(1password)
+builtin which -s brew &>/dev/null && plugins+=(brew mybrew)
+builtin which -s bundle &>/dev/null && plugins+=(bundle)
+builtin which -s cloudctl &>/dev/null && plugins+=(icp)
+builtin which -s docker &>/dev/null && plugins+=(docker)
+builtin which -s fab &>/dev/null && plugins+=(fabric)
+builtin which -s go &>/dev/null && plugins+=(go)
 builtin which -s helm &>/dev/null && plugins+=(helm)
-#[[ -d /opt/chefdk ]] && plugins+=(chefdk)
-#[[ -d ~/git/terminal_markdown_viewer ]] && plugins+=(mdv)
+builtin which -s http &>/dev/null && plugins+=(httpie)
+builtin which -s ibmcloud &>/dev/null && plugins+=(ibmcloud)
+builtin which -s kubectl &>/dev/null && plugins+=(kubectl customk8s)
+builtin which -s nmap &>/dev/null && plugins+=(nmap)
+builtin which -s oc &>/dev/null && plugins+=(oc oc-cmd fyre)
+builtin which -s op &>/dev/null && plugins+=(1password)
+builtin which -s rbenv &>/dev/null && plugins+=(rbenv)
+builtin which -s terraform &>/dev/null && plugins+=(terraform)
+#builtin which -s tig &>/dev/null && plugins+=(tig)
+builtin which -s vagrant &>/dev/null && plugins+=(vagrant)
+builtin which -s vault &>/dev/null && plugins+=(vault)
+builtin which -s pyenv &>/dev/null && plugins+=(pyenv)
+builtin which -s virtualenv &>/dev/null && plugins+=(virtualenv)
 
-#[ -e "~/.oh-my-zsh/custom/aws.zsh" ] && plugins+=(aws)
+#builtin which -s crc &>/dev/null && plugins+=(crc-oc)
+
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
+[[ -d /usr/local/gradle ]] && plugins+=(gradle)
+[[ -d /usr/local/ibm-java ]] && plugins+=(ibmjava)
+
 [ -e "~/packer/packer" ] && plugins+=(packer)
 
-<<<<<<< HEAD
 #[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
 #[ "$(uname -s)" = "Linux" ] && plugins+=(sshagent)
 #[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
-=======
-[ "$(uname -s)" = "Darwin" ] && plugins+=(aj osx history-substring-searchi zsh-syntax-highlighting)
-[ "$(uname -s)" = "Linux" ] && plugins+=(aj history-substring-search zsh-syntax-highlighting )
-[ "$(cat /etc/debian_release 2>/dev/null)" = "squeeze/sid" ] && plugins+=(history-substring-search)
->>>>>>> 38a6148cf697b61f632bfbef90b688e4ab4f3921
 
 #source ~/dotfiles/zsh/custom/plugins/gitstatus/gitstatus.plugin.zsh
 #source ~/dotfiles/zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
@@ -157,15 +153,19 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=green'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # added by travis gem
-<<<<<<< HEAD
 [ -f /Users/bkrein/.travis/travis.sh ] && source /Users/bkrein/.travis/travis.sh
 
 ### Added by the Bluemix CLI
-source /usr/local/ibmcloud/autocomplete/zsh_autocomplete
+#source /usr/local/ibmcloud/autocomplete/zsh_autocomplete
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
 
-=======
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
->>>>>>> 38a6148cf697b61f632bfbef90b688e4ab4f3921
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+. /usr/local/opt/asdf/asdf.sh
+
+eval "$(pyenv init -)"
+
+# crwctl autocomplete setup
+CRWCTL_AC_ZSH_SETUP_PATH=/Users/bkrein/Library/Caches/crwctl/autocomplete/zsh_setup && test -f $CRWCTL_AC_ZSH_SETUP_PATH && source $CRWCTL_AC_ZSH_SETUP_PATH;
